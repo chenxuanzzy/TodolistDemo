@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>To-dolist</title>
+  <script src="https://kit.fontawesome.com/bb3ac43243.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Cabin&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="todostyle.css" />
+</head>
+<body>
+<div id="container">
+  <h1>To-Do List<i class="fa fa-plus"></i></h1>
+  <input type="text" placeholder="Add new Todo">
+  <ul>
+    <li><span><i class="fas fa-trash"></i></span> Go to Sleep</li>
+    <li><span><i class="fas fa-trash"></i></span> Do your homework</li>
+    <li><span><i class="fas fa-trash"></i></span> Check tomorrow class</li>
+  </ul>
+</div>
+<script>
+  $("ul").on("click","li", function(){
+  //$(this).toggleClass("completed");
+  if($(this).css("color") === "rgb(128, 128, 128)")
+    {
+      $(this).css({
+        color:"black", 
+        textDecoration:"none"
+      });
+    }
+  else
+    {
+      $(this).css({
+        color:"gray",
+        textDecoration:"line-through"});
+    }
+});
+
+$("ul").on("click","span",function(event){
+  $(this).parent().fadeOut(500,function(){
+    $(this).remove();
+  });
+  event.stopPropagation();
+});
+
+$("input[type='text']").keypress(function(event){
+  if(event.which === 13)
+    {
+      var todoText = $(this).val();
+      $(this).val("");
+      $("ul").append("<li><span> <i class='fas fa-trash'> </i></span>" + todoText +"</li>")
+    }
+});
+
+$(".fa-plus").click(function(){
+           $("input[type='text']").fadeToggle();
+                    });
+</script>
+</body>
+</html>
